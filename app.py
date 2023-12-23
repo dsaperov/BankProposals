@@ -65,17 +65,13 @@ def build_dependency_graph(feature1_type, df, feature1, is_last_feature, feature
         # Построить диаграмму размаха
         sns.boxplot(x=feature2, y=feature1, data=df, hue=feature2, palette='Set2', legend=False, ax=axs[0])
 
-        # Построить диаграмму пересечения распределений
-        feature2_unique_values = df[feature2].unique()
-        unique_val_1, unique_val_2 = feature2_unique_values[0], feature2_unique_values[1]
-        df1, df2 = df[df[feature2] == unique_val_1], df[df[feature2] == unique_val_2]
-
-        pars = dict(x=feature1, kde=True, alpha=0.3, edgecolor='grey', stat='density')
-        sns.histplot(data=df1, color='blue', label=str(unique_val_1), **pars)
-        sns.histplot(data=df2, color='orange', label=str(unique_val_2), **pars)
-
-        axs[1].legend(loc='upper right')
+        # Построить диаграмму распределений признаков, раскрашенную по значениям целевой переменной
+        sns.histplot(data=df, x=feature1, hue=feature2, kde=True, stat='density', common_norm=False, multiple='dodge',
+                     ax=axs[1])
+        plt.setp(axs[1].get_legend().get_texts(), fontsize='8')
+        plt.setp(axs[1].get_legend().get_title(), fontsize='8')
         axs[1].yaxis.set_visible(False)
+
         plt.subplots_adjust(hspace=0.4)
 
     # Построить сгруппированную столбчатую диаграмму
