@@ -1,3 +1,5 @@
+from data_processing import process_data, NUM_FEATURES
+
 import os
 
 import matplotlib.pyplot as plt
@@ -11,8 +13,6 @@ LABELS_FOR_CAT_FEATURES = {
     'SOCSTATUS_PENS_FL': {1:'Пенсионеры', 0:'Не пенсионеры'},
     'TARGET': {1:'Отклик был', 0:'Отклика не было'}
 }
-
-NUM_FEATURES = ['AGE', 'CHILD_TOTAL', 'DEPENDANTS', 'PERSONAL_INCOME', 'LOAN_NUM_TOTAL', 'LOAN_NUM_CLOSED']
 
 HEADER_4_PREFIX = '#### '
 HR = '___'
@@ -93,7 +93,6 @@ def build_dependency_graph(feature1_type, df, feature1, is_last_feature, feature
 st.set_page_config(page_title='Отклик на предложение банка')
 
 if not os.path.exists('df.pkl'):
-    from data_processing import process_data
     process_data()
 
 df = st.cache_data(pd.read_pickle)('df.pkl')

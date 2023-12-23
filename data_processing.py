@@ -1,7 +1,12 @@
 import os
+
+import numpy as np
 import pandas as pd
+from scipy import stats
 
 DATASET_FOLDER = 'datasets'
+
+NUM_FEATURES = ['AGE', 'CHILD_TOTAL', 'DEPENDANTS', 'PERSONAL_INCOME', 'LOAN_NUM_TOTAL', 'LOAN_NUM_CLOSED']
 
 
 def get_joined_df(df1, df2, how):
@@ -37,6 +42,14 @@ def compile_final_df(clients, target, salary, loan_agg):
     return final_df
 
 
+def remove_outliers(df):
+    no_outliers_boolean_series = pd.Series([True] * len(df), index=df.index)
+    for feature_name in NUM_FEATURES:
+        zscore_series = np.abs(stats.zscore(df[feature_name]))
+        no_outliers_boolean_series &= zscore_series < 5
+    return df[no_outliers_boolean_series]
+
+
 def process_data():
     clients, close_loan, loan, salary, target = load_datasets()
     loan_agg = aggregate_loan(loan, close_loan)
@@ -44,6 +57,9 @@ def process_data():
     salary.drop_duplicates(inplace=True)
 
     final_df = compile_final_df(clients, target, salary, loan_agg)
+
+    final_df = remove_outliers(final_df)
+
     final_df.to_pickle('df.pkl')
 
 
