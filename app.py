@@ -8,10 +8,10 @@ import seaborn as sns
 import streamlit as st
 
 LABELS_FOR_CAT_FEATURES = {
-    'GENDER': {1:'Мужчины', 0:'Женщины'},
-    'SOCSTATUS_WORK_FL': {1:'Работает', 0:'Не работает'},
-    'SOCSTATUS_PENS_FL': {1:'Пенсионеры', 0:'Не пенсионеры'},
-    'TARGET': {1:'Отклик был', 0:'Отклика не было'}
+    'GENDER': {1: 'Мужчины', 0: 'Женщины'},
+    'SOCSTATUS_WORK_FL': {1: 'Работает', 0: 'Не работает'},
+    'SOCSTATUS_PENS_FL': {1: 'Пенсионеры', 0: 'Не пенсионеры'},
+    'TARGET': {1: 'Отклик был', 0: 'Отклика не было'}
 }
 
 HEADER_4_PREFIX = '#### '
