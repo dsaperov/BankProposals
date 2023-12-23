@@ -126,7 +126,7 @@ st.pyplot(plt)
 st.markdown('''Наибольшая корреляция (>0.5) наблюдается между признаками:
 - `AGE` и `SOCSTATUS_PENS_FL` (0.56)
 - `CHILD_TOTAL` и `DEPENDANTS` (0.51)
-- `LOAN_NUM_TOTAL`И `LOAN_NUM_CLOSED` (0.86)
+- `LOAN_NUM_TOTAL`И `LOAN_NUM_CLOSED` (0.84)
             
 **Целевая переменная** не имеет значимой корреляции ни с одним признаком.''')
 st.header('Числовые характеристики')
